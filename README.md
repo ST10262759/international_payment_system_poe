@@ -167,47 +167,44 @@ services:
       - "27017:27017"
 Start all services:
 
-## docker-compose up --build
-🧩 Summary of Requirements
+docker-compose up --build
+
+## 🧩 Summary of Requirements
 Feature	Description
-🔐 Password Security	Bcrypt hashing + custom salting
-🧾 Input Validation	Regex whitelisting/blacklisting
-🌐 SSL Security	HTTPS on all portals
-🛡️ Attack Protection	XSS, CSRF, Injection, Clickjacking prevention
-🧰 DevSecOps	CircleCI + SonarCloud pipeline
-🧩 Dockerization	Backend + both portals in one compose
-👨‍💼 Employee Portal	Role-based management system
+- 🔐 Password Security	Bcrypt hashing + custom salting
+- 🧾 Input Validation	Regex whitelisting/blacklisting
+- 🌐 SSL Security	HTTPS on all portals
+- 🛡️ Attack Protection	XSS, CSRF, Injection, Clickjacking prevention
+- 🧰 DevSecOps	CircleCI + SonarCloud pipeline
+- 🧩 Dockerization	Backend + both portals in one compose
+- 👨‍💼 Employee Portal	Role-based management system
 
 ##🔄 Changelog (Part 3 Updates)
 Area	Update
-🧩 New Portal	Added Employee/Admin Portal
-🔐 Authentication	Added role-based access for employees/admins
-🧰 Dockerization	Entire stack runs via single docker-compose.yml
-🌐 SSL	Implemented HTTPS across all components
-🧠 DevSecOps	CircleCI + SonarCloud integration improved
-🧱 Security	Strengthened password hashing, regex whitelisting, and CSRF tokens
-🎨 UI	Improved consistency between portals
-🔧 Bug Fixes	Addressed rubric feedback and merged security recommendations
+- 🧩 New Portal	Added Employee/Admin Portal
+- 🔐 Authentication	Added role-based access for employees/admins
+- 🧰 Dockerization	Entire stack runs via single docker-compose.yml
+- 🌐 SSL	Implemented HTTPS across all components
+- 🧠 DevSecOps	CircleCI + SonarCloud integration improved
+- 🧱 Security	Strengthened password hashing, regex whitelisting, and CSRF tokens
+- 🎨 UI	Improved consistency between portals
+- 🔧 Bug Fixes	Addressed rubric feedback and merged security recommendations
 
 ## 📚 References
-OWASP Top 10 Security Risks
 
-Node.js Security Best Practices
+- OWASP Top 10 Security Risks
+- Node.js Security Best Practices
+- React Input Sanitization Guide
+- Docker Compose Documentation
+- CircleCI Docs
+- SonarCloud Docs
 
-React Input Sanitization Guide
-
-Docker Compose Documentation
-
-CircleCI Docs
-
-SonarCloud Docs
-
-#🧾 Installation & Setup
-Clone the repository
-git clone <repository-url>
-cd international-payment-system
-
-## Build and run all services
-docker-compose up --build
-✅ End of README
+# 🧾 Installation & Setup
+- Clone the repository
+- git clone <repository-url>
+- cd international-payment-system
+- Build and run all services
+- docker-compose up --build
+  
+# ✅ End of README
 
