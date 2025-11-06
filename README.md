@@ -125,49 +125,49 @@ A secure internal interface for employees and administrators.
 The **entire system** (backend + both portals) runs with one command using `docker-compose`.
 
 ### 🧩 docker-compose.yml
-version: '3.8'
+- version: '3.8'
+  
+- services:
+-   backend:
+-     build: ./backend
+-     container_name: payment-backend
+-     ports:
+-       - "5000:5000"
+-     env_file:
+-       - ./backend/.env
+-     depends_on:
+-       - mongo
+-     volumes:
+-       - ./cert-perm:/cert-perm
 
-services:
-  backend:
-    build: ./backend
-    container_name: payment-backend
-    ports:
-      - "5000:5000"
-    env_file:
-      - ./backend/.env
-    depends_on:
-      - mongo
-    volumes:
-      - ./cert-perm:/cert-perm
+-   user-portal:
+-     build: ./user-portal
+-     container_name: payment-user-portal
+-     ports:
+-       - "3000:3000"
+-     depends_on:
+-       - backend
+-     volumes:
+-       - ./cert-perm:/cert-perm
 
-  user-portal:
-    build: ./user-portal
-    container_name: payment-user-portal
-    ports:
-      - "3000:3000"
-    depends_on:
-      - backend
-    volumes:
-      - ./cert-perm:/cert-perm
+-   employee-portal:
+-     build: ./employee-portal
+-     container_name: payment-employee-portal
+-     ports:
+-       - "4000:4000"
+-     depends_on:
+-       - backend
+-     volumes:
+-       - ./cert-perm:/cert-perm
 
-  employee-portal:
-    build: ./employee-portal
-    container_name: payment-employee-portal
-    ports:
-      - "4000:4000"
-    depends_on:
-      - backend
-    volumes:
-      - ./cert-perm:/cert-perm
+-  mongo:
+-    image: mongo
+-     container_name: mongo-db
+-     ports:
+-       - "27017:27017"
+-  Start all services:
 
-  mongo:
-    image: mongo
-    container_name: mongo-db
-    ports:
-      - "27017:27017"
-Start all services:
-
-docker-compose up --build
+- docker-compose up --build
 
 ## 🧩 Summary of Requirements
 Feature	Description
