@@ -1,81 +1,31 @@
+# Use the latest 2.1 version of CircleCI pipeline process engine.
+# See: https://circleci.com/docs/reference/configuration-reference
 version: 2.1
 
+# Define a job to be invoked later in a workflow.
+# See: https://circleci.com/docs/guides/orchestrate/jobs-steps/#jobs-overview & https://circleci.com/docs/reference/configuration-reference/#jobs
 jobs:
-  build-frontend:
+  say-hello:
+    # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
+    # See: https://circleci.com/docs/guides/execution-managed/executor-intro/ & https://circleci.com/docs/reference/configuration-reference/#executor-job
     docker:
-      - image: cimg/node:18.17
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - frontend-deps-{{ checksum "frontend-vite/package-lock.json" }}
-            - frontend-deps-
-      - run:
-          name: Install frontend dependencies
-          command: |
-            cd frontend-vite
-            npm ci
-      - save_cache:
-          key: frontend-deps-{{ checksum "frontend-vite/package-lock.json" }}
-          paths:
-            - frontend-vite/node_modules
-      - run:
-          name: Build frontend
-          command: |
-            cd frontend-vite
-            npm run build
+      # Specify the version you desire here
+      # See: https://circleci.com/developer/images/image/cimg/base
+      - image: cimg/base:current
 
-  build-employee-portal:
-    docker:
-      - image: cimg/node:18.17
+    # Add steps to the job
+    # See: https://circleci.com/docs/guides/orchestrate/jobs-steps/#steps-overview & https://circleci.com/docs/reference/configuration-reference/#steps
     steps:
+      # Checkout the code as the first step.
       - checkout
-      - restore_cache:
-          keys:
-            - employee-portal-deps-{{ checksum "employee-portal/package-lock.json" }}
-            - employee-portal-deps-
       - run:
-          name: Install employee portal dependencies
-          command: |
-            cd employee-portal
-            npm ci
-      - save_cache:
-          key: employee-portal-deps-{{ checksum "employee-portal/package-lock.json" }}
-          paths:
-            - employee-portal/node_modules
-      - run:
-          name: Build employee portal
-          command: |
-            cd employee-portal
-            npm run build
+          name: "Say hello"
+          command: "echo Hello, World!"
 
-  build-backend:
-    docker:
-      - image: cimg/dotnet:8.0
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - backend-deps-{{ checksum "backend/*.csproj" }}
-            - backend-deps-
-      - run:
-          name: Restore backend dependencies
-          command: |
-            cd backend
-            dotnet restore
-      - save_cache:
-          key: backend-deps-{{ checksum "backend/*.csproj" }}
-          paths:
-            - ~/.nuget/packages
-      - run:
-          name: Build backend
-          command: |
-            cd backend
-            dotnet build --configuration Release --no-restore
-
+# Orchestrate jobs using workflows
+# See: https://circleci.com/docs/guides/orchestrate/workflows/ & https://circleci.com/docs/reference/configuration-reference/#workflows
 workflows:
-  build_and_test:
+  say-hello-workflow: # This is the name of the workflow, feel free to change it to better match your workflow.
+    # Inside the workflow, you define the jobs you want to run.
     jobs:
-      - build-frontend
-      - build-employee-portal
-      - build-backend
+      - say-hello
