@@ -17,7 +17,9 @@ jobs:
       - checkout
       - run:
           name: "Install findutils"
-          command: apk add --no-cache findutils
+          command: |
+            apk update
+            apk add findutils
       - run:
           name: "List project files"
           command: find .
