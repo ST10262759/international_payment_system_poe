@@ -1,6 +1,7 @@
-<img width="1710" height="567" alt="image" src="https://github.com/user-attachments/assets/695ee1a9-cdfa-4101-b359-8ae118827df8" />
+<img width="1705" height="570" alt="image" src="https://github.com/user-attachments/assets/503935ca-ab42-4523-8554-7a2dd5ee4efb" />
 
-# 🌍💳 International Payment System — Part 2 & 3
+
+# 🌍💳 International Payment System — POE Final
 
 Welcome to the **International Payment System Project**!  
 This repository now includes **Part 2** and **Part 3**, covering **secure full-stack payment portals**, **DevSecOps pipelines**, and **multi-role authentication** for both **users** and **employees**.  
