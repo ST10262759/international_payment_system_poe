@@ -16,16 +16,6 @@ jobs:
     steps:
       - checkout
       - run:
-          name: "Install findutils"
-          shell: /bin/sh
-          command: |
-            apk update
-            apk add findutils
-      - run:
-          name: "List project files"
-          shell: /bin/sh
-          command: find .
-      - run:
           name: "Run SonarQube Analysis"
           shell: /bin/sh
           command: |
