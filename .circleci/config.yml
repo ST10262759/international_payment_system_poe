@@ -4,15 +4,21 @@ jobs:
   build-frontend:
     docker:
       - image: cimg/node:18.17
-    working_directory: ~/project/frontend-vite
     steps:
-      - checkout:
-          path: ~/project
+      - checkout
+      - restore_cache:
+          keys:
+            - frontend-deps-{{ checksum "frontend-vite/package-lock.json" }}
+            - frontend-deps-
       - run:
           name: Install frontend dependencies
           command: |
             cd frontend-vite
-            npm install
+            npm ci
+      - save_cache:
+          key: frontend-deps-{{ checksum "frontend-vite/package-lock.json" }}
+          paths:
+            - frontend-vite/node_modules
       - run:
           name: Build frontend
           command: |
@@ -22,15 +28,21 @@ jobs:
   build-employee-portal:
     docker:
       - image: cimg/node:18.17
-    working_directory: ~/project/employee-portal
     steps:
-      - checkout:
-          path: ~/project
+      - checkout
+      - restore_cache:
+          keys:
+            - employee-portal-deps-{{ checksum "employee-portal/package-lock.json" }}
+            - employee-portal-deps-
       - run:
           name: Install employee portal dependencies
           command: |
             cd employee-portal
-            npm install
+            npm ci
+      - save_cache:
+          key: employee-portal-deps-{{ checksum "employee-portal/package-lock.json" }}
+          paths:
+            - employee-portal/node_modules
       - run:
           name: Build employee portal
           command: |
@@ -40,20 +52,26 @@ jobs:
   build-backend:
     docker:
       - image: cimg/dotnet:8.0
-    working_directory: ~/project/backend
     steps:
-      - checkout:
-          path: ~/project
+      - checkout
+      - restore_cache:
+          keys:
+            - backend-deps-{{ checksum "backend/*.csproj" }}
+            - backend-deps-
       - run:
           name: Restore backend dependencies
           command: |
             cd backend
             dotnet restore
+      - save_cache:
+          key: backend-deps-{{ checksum "backend/*.csproj" }}
+          paths:
+            - ~/.nuget/packages
       - run:
           name: Build backend
           command: |
             cd backend
-            dotnet build --configuration Release
+            dotnet build --configuration Release --no-restore
 
 workflows:
   build_and_test:
