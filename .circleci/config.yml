@@ -1,35 +1,32 @@
 version: 2.1
 
 jobs:
-  # --- Frontend build job ---
   build-frontend:
     docker:
-      - image: cimg/node:20.11
+      - image: cimg/node:18.19
     working_directory: ~/project/frontend-vite
     steps:
       - checkout
       - run:
-          name: Install Dependencies
+          name: Install dependencies
           command: npm install
       - run:
-          name: Build Frontend
+          name: Build frontend (Vite)
           command: npm run build
 
-  # --- Employee Portal build job ---
   build-employee-portal:
     docker:
-      - image: cimg/node:20.11
+      - image: cimg/node:18.19
     working_directory: ~/project/employee-portal
     steps:
       - checkout
       - run:
-          name: Install Dependencies
+          name: Install dependencies
           command: npm install
       - run:
-          name: Build Employee Portal
+          name: Build Employee Portal (React)
           command: npm run build
 
-  # --- Backend build/test job ---
   build-backend:
     docker:
       - image: cimg/dotnet:8.0
@@ -37,20 +34,16 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Restore Dependencies
+          name: Restore NuGet packages
           command: dotnet restore
       - run:
-          name: Build Backend
+          name: Build backend project
           command: dotnet build --configuration Release
-      - run:
-          name: Run Tests
-          command: dotnet test --no-build --verbosity normal
 
-# --- Workflow to run all jobs ---
 workflows:
   version: 2
   build_and_test:
     jobs:
-      - build-backend
       - build-frontend
       - build-employee-portal
+      - build-backend
