@@ -163,7 +163,7 @@ services:
 - docker-compose up --build
 
 ## 🧩 Summary of Requirements
-Feature	Description
+### Feature	Description
 - 🔐 Password Security	Bcrypt hashing + custom salting
 - 🧾 Input Validation	Regex whitelisting/blacklisting
 - 🌐 SSL Security	HTTPS on all portals
@@ -172,8 +172,8 @@ Feature	Description
 - 🧩 Dockerization	Backend + both portals in one compose
 - 👨‍💼 Employee Portal	Role-based management system
 
-##🔄 Changelog (Part 3 Updates)
-Area	Update
+## 🔄 Changelog (Part 3 Updates)
+### Area	Update
 - 🧩 New Portal	Added Employee/Admin Portal
 - 🔐 Authentication	Added role-based access for employees/admins
 - 🧰 Dockerization	Entire stack runs via single docker-compose.yml
