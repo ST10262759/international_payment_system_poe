@@ -32,6 +32,23 @@ function PaymentHistory() {
     navigate("/");
   };
 
+  // ✅ Format amount as ZAR currency
+  const formatAmount = (amount) => {
+    return new Intl.NumberFormat("en-ZA", {
+      style: "currency",
+      currency: "ZAR",
+    }).format(amount);
+  };
+
+  // ✅ Format account number (show last 4 digits only)
+  const formatAccountNumber = (acc) => {
+    if (!acc) return "N/A";
+    const accStr = String(acc);
+    return accStr.length > 4
+      ? "**** **** **** " + accStr.slice(-4)
+      : accStr;
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
       {/* Header */}
@@ -180,10 +197,10 @@ function PaymentHistory() {
                   {history.map((p) => (
                     <tr key={p._id} className="hover:bg-slate-50 transition-colors duration-150">
                       <td className="px-6 py-4 whitespace-nowrap text-slate-800 font-medium">
-                        {p.accountNumber}
+                        {formatAccountNumber(p.accountNumber)}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-slate-700">
-                        ${p.amount.toFixed(2)}
+                        {formatAmount(p.amount)}
                       </td>
                       <td
                         className={`px-6 py-4 whitespace-nowrap font-semibold ${
