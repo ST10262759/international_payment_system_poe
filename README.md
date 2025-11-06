@@ -19,17 +19,6 @@ The project demonstrates strong **security**, **compliance**, and **DevOps integ
 
 ---
 
-## 👥 Team Members
-
-| Name | Student Number | Role |
-|------|----------------|------|
-| [Your Name] | [Student Number] | Full Stack Developer |
-| [Member 2] | [Student Number] | Frontend Developer |
-| [Member 3] | [Student Number] | Backend Developer |
-| [Member 4] | [Student Number] | DevOps & Security Engineer |
-
----
-
 ## ⚙️ Backend Requirements (Node.js + Express)
 
 ### 🔐 Authentication
